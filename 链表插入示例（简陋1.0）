@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct A
+{
+	int num;
+	struct A *next;
+}ID;
+
+void main()
+{
+	void cr(ID *h, int n, ID *m);
+	int i, n;
+	ID *h, *p1, *p2, *m;
+	h = (ID*)malloc(sizeof(ID));
+	p1 = h;
+	
+
+	for(i = 0;i < 5; i++)
+	{
+		p2 = (ID*)malloc(sizeof(ID));
+		p2->num = i+1;
+		p1->next = p2;
+		p1 = p2;
+		p1->next = NULL;
+	}
+	
+	p1 = h->next;
+	while(p1->next)
+	{
+		printf("->%d",p1->num);
+		p1 = p1->next;
+	}
+	printf("\n");
+	
+	m = (ID*)malloc(sizeof(ID));
+	m->num = 100;
+	printf("请输入插入序列n：");
+	scanf("%d",&n);
+	cr(h, n, m);
+
+	p1 = h->next;
+	while(p1->next)
+	{
+		printf("->%d",p1->num);
+		p1 = p1->next;
+	}
+	printf("\n");
+}
+
+void cr(ID *h, int n, ID *m)
+{
+	ID *p;
+	p = h;
+	
+	while(n <= 0 || n > 5)
+	{
+		printf("错误，请重新输入n：");    
+		scanf("%d",&n);      //必须输入1~5的数字，否者会一直循环
+	}
+	n = n-1;
+	while(n)
+	{
+		p = p->next;
+		n--;
+	}
+	m->next = p->next;
+	p->next = m;
+}
