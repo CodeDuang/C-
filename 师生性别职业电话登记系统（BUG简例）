@@ -1,0 +1,11 @@
+#include<stdio.h>
+
+void main()
+{
+	char a, b;
+	printf("输入一个字符；");
+	a = getchar(); //如何解决输入字符串的情况
+	printf("再输入一个字符；");
+	scanf("%c", &b);
+	printf("两个字符组合起来为；%c%c",a, b);
+}
