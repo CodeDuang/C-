@@ -1,0 +1,87 @@
+//##########################
+//#  师生手机号码登记系统  #
+//##########################
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct people
+{
+	int num;
+	char name[10];
+	char sex;
+	char job;
+	union a
+	{
+		int clas;
+		char p[10];
+	}zy;
+	struct people *next;
+}ID;
+
+void main()
+{
+	ID *h, *p1, *p2;
+	int n = 2, i;
+
+	h = (ID*)malloc(sizeof(ID));
+	p1 = h;
+	for(i = 0; i < n; i++)
+	{	
+		
+		p2 = (ID*)malloc(sizeof(ID));
+		p1->next = p2;
+		p1 = p2;
+		printf("输入号码：");
+		scanf("%d",&p2->num);
+		printf("输入名字；");
+		getchar();
+		gets(p2->name);
+		printf("输入性别（m/g）；"); 
+		p2->sex = getchar(); 
+		getchar();
+		while(p2->sex != 'm' && p2->sex != 'g') /*？？？？？？当输入的是字符串时，会多次判断每个字符
+												（如何优化，使不用敲回车便可以直接判断，或者输入字符串只判断一次）？？？？？*/
+		{
+			printf("输入错误，请重新输入性别；");
+			scanf("%c",&p2->sex);
+		}
+		printf("请输入身份（s/t）：");
+		scanf("%c",&p2->job);
+		getchar();
+		while(p2->job != 's' && p2->job != 't')
+		{
+			printf("输入错误，请重新输入身份；");
+			scanf("%c",&p2->job);
+
+		}
+		if(p2->job == 's')
+		{
+			printf("请输入班级：");
+			scanf("%d",&p2->zy.clas);
+		}
+		else 
+		{
+			printf("请输入职位；");
+			scanf("%s",&p2->zy.p);
+		}
+	}
+	printf("\n\n已录入\n\n");
+		p1 = h->next;
+		for(i = 0; i < n; i++)
+		{
+			printf("姓名：%s\t",p1->name);
+			printf("性别；%c\t",p1->sex);
+			if(p2->job == 's')
+			{
+				printf("班级：%d\t",p1->zy.clas);
+			}
+			else 
+			{
+				printf("职位；%s\t",p1->zy.p);
+			}
+			printf("号码：%d\n",p2->num);
+			p1 = p1->next;
+		}
+		
+}
