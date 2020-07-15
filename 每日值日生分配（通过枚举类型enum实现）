@@ -1,0 +1,36 @@
+#include<stdio.h>
+
+void main()
+{
+	enum boy{Tom, Danny, Gan, LiLei}month[31], j;
+	int i;
+
+	j = Tom;
+
+	for(i = 1; i <= 30; i++)
+	{
+		month[i] = j;
+		j++;
+		if(j > LiLei)
+		{			
+			j = Tom;
+		}
+	}
+	for(i = 1; i <= 30; i++)
+	{
+		switch(month[i])
+		{
+		case Tom: printf("%4d %s\t", i, " Tom");break;
+		case Danny: printf("%4d %s\t", i, " Danny");break;
+		case Gan: printf("%4d %s\t", i, " Gan");break;
+		case LiLei: printf("%4d %s\t", i, " LiLei");break;
+		default: break;
+		}
+		if(i%5 == 0)
+		{
+			printf("\n");
+		}
+	}
+	printf("\n");
+	
+}
