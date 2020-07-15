@@ -20,7 +20,7 @@ void main()
 	{
 		switch(month[i])
 		{
-		case Tom: printf("%4d %s\t", i, " Tom");break;
+		case Tom: printf("%4d %s\t", i, " Tom");break; //注意，month[i]不能直接当作字符串用%s输出
 		case Danny: printf("%4d %s\t", i, " Danny");break;
 		case Gan: printf("%4d %s\t", i, " Gan");break;
 		case LiLei: printf("%4d %s\t", i, " LiLei");break;
