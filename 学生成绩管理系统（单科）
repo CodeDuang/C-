@@ -1,0 +1,66 @@
+//################################              待优化：1.如何判断错误格式输入 2.如何改为多学科
+
+//#   学生成绩管理系统（单科）   #
+
+//################################
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct student //学生信息结构体内容
+{
+	int num; //学号
+	char name[10]; //姓名
+	float score; //成绩
+	struct student *next;
+}ID;
+
+void main()
+{
+	void out(ID *h, int n); //声明输出函数（在main函数后面）
+	int n = 0; //学生数
+	ID *h, *p1, *p2;
+	h = (ID*)malloc(sizeof(ID)); //h里面不放信息
+	p1 = h;
+
+
+
+	do //该循环录入学生信息并计数，当学号为0跳出循环
+	{
+		p2 = (ID*)malloc(sizeof(ID)); //为存放学生信息申请空间
+		printf("学号：");
+		scanf("%d",&p2->num);
+		printf("姓名：");
+		getchar(); //把stdin缓冲区的回车符号接收，防止gets函数错误读取
+		gets(p2->name);
+		printf("分数：");
+		scanf("%f",&p2->score);
+		printf("\n* * * * *\n\n");
+		p1->next = p2;
+		p1 = p2;
+		n++;
+	}
+	while(p2->num);
+
+	n -= 1; //除去最后一个无效信息
+
+	printf("# 已录入(学生数：%d) #\n\n",n);
+	out(h, n);
+
+}
+
+void out(ID *h, int n) //输出函数
+{
+	ID *a;
+	a = h->next;
+	printf("\t*****\t\t****\t\t*****\n");
+	printf("\t*学号\t\t姓名\t\t成绩*\n");
+	while(n)
+	{
+		printf("\t*%d\t\t%s\t\t%4.1f*\n", a->num, a->name, a->score);
+		a = a->next;
+		n--;
+	}
+	printf("\t*****\t\t****\t\t*****\n");
+}
+	
