@@ -4,15 +4,21 @@
 void main()
 {
 	FILE *fp;
-	if(fp = fopen("F:\\a 随时删除\\Hell.txt","w")) //判断文件是否打开成功（打开失败返回值为0）
+	char filename[20], ch;
+	printf("输入文本文件名(注意后缀.txt)：");
+	scanf("%s",filename);
+	if(!(fp = fopen(filename,"w")))
 	{
-		fputs("Hello World!",fp);
-		printf("运行成功！\n");
-		system("pause");
+		exit(0); //终止程序
 	}
-	else
+	printf("运行成功！\n");
+	printf("请输入内容：");
+	getchar();
+	ch = getchar();
+	while(ch != EOF) //EOF在键盘上用Ctrl+z表示
 	{
-		printf("文件打开失败！\n");
+		fputc(ch, fp);
+		ch = getchar();
 	}
-	fclose(fp); //记得脱钩
+	fclose(fp);
 }
