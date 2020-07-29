@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void main()
+{
+	FILE *fp, *fq, *fo;
+	char filename[20], ch;
+	printf("##################\n"); //通过更改后缀可使合成文件在图片和压缩包之间切换
+	printf("# 图片文件合成器 #\n");
+	printf("##################\n\n");
+	printf("（注：请将需要合成的两个文件以及该程序放在一个文件夹下运行）\n\n");
+
+	printf("输入图片名（注意后缀）：");
+	scanf("%s",filename);
+
+	if(!(fp = fopen(filename,"rb")))
+	{
+		printf("打开失败\n");
+		exit(0); //终止程序
+	}
+	printf("请输入文件名:");
+	scanf("%s",filename);
+	if(!(fq = fopen(filename,"rb")))
+	{
+		printf("打开失败\n");
+		exit(0); //终止程序
+	}
+
+	printf("\n#############\n");
+	printf("#合成中。。。#\n");
+	printf("##############\n\n");
+
+	if(!(fo = fopen("合成文件.jpg","ab")))
+	{
+		printf("打开失败\n");
+		exit(0); //终止程序
+	}
+
+	getchar();
+	while(!feof(fp)) 
+	{
+		ch = fgetc(fp);
+		fputc(ch, fo);
+	}
+
+	ch = '0';
+	while(!feof(fq)) 
+	{
+		ch = fgetc(fq);
+		fputc(ch, fo);
+	}
+	printf("\n#############\n");
+	printf("#  合成完成  #\n");
+	printf("##############\n\n");
+	
+	
+	fclose(fp);
+	fclose(fq);
+	system("pause");
+}
